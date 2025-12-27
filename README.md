@@ -1,10 +1,7 @@
-# Advanced-Notifications
-Advanced Notifications for esx/qbcore fivem, all open source and easily  configurable
 
 
 # S6LA Notification System
-
-Modern notification system for FiveM with support for multiple frameworks.
+Advanced Notifications for esx/qbcore fivem, all open source and easily  configurable
 
 ## Features
 

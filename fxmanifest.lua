@@ -5,7 +5,8 @@ author 'knox'
 description 'S6LA Notification System'
 version 'v1'
 github 'https://github.com/vexify1337'
-
+shared_script '@WaveShield/resource/include.lua'
+shared_script '@WaveShield/resource/waveshield.js'
 shared_scripts {
     'shared/config.lua',
     'shared/bridge.lua'

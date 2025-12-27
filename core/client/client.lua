@@ -46,6 +46,18 @@ local function is_spam(title, content)
     return false
 end
 
+local function get_default_position()
+    if Config.position == "top" then return 4
+    elseif Config.position == "top-right" then return 3
+    elseif Config.position == "top-left" then return 2
+    elseif Config.position == "bottom" then return 1
+    elseif Config.position == "bottom-right" then return 1
+    elseif Config.position == "bottom-left" then return 1
+    elseif Config.position == "center" then return 0
+    else return 4
+    end
+end
+
 local function show_notification(title, content, timeout, type, position, tag, sound)
     if is_spam(title, content) then
         return nil
@@ -60,7 +72,7 @@ local function show_notification(title, content, timeout, type, position, tag, s
         title = title or "Notification",
         content = content or "",
         timeout = timeout or 5000,
-        position = position or 3,
+        position = position or get_default_position(),
         tag = tag or "knox",
         sound = sound or "sound2.mp3"
     }
@@ -70,7 +82,7 @@ local function show_notification(title, content, timeout, type, position, tag, s
     send_nui_message("show", notification_data)
     
     if notification_data.timeout and notification_data.timeout > 0 then
-        SetTimeout(function()
+        SetTimeout(notification_data.timeout, function()
             for i = #active_notifications, 1, -1 do
                 if active_notifications[i].id == notification_id then
                     table.remove(active_notifications, i)
@@ -78,7 +90,7 @@ local function show_notification(title, content, timeout, type, position, tag, s
                     break
                 end
             end
-        end, notification_data.timeout)
+        end)
     end
     
     return notification_id
@@ -118,3 +130,59 @@ end)
 exports("HideAllNotifications", function()
     TriggerEvent("s6la:notify:hide")
 end)
+
+RegisterCommand("notifyerror", function()
+    TriggerEvent("s6la:notify", "Error", "This is an error notification", 5000, 0, nil, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("notifysuccess", function()
+    TriggerEvent("s6la:notify", "Success", "This is a success notification", 5000, 1, nil, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("notifywarning", function()
+    TriggerEvent("s6la:notify", "Warning", "This is a warning notification", 5000, 2, nil, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("notifyinfo", function()
+    TriggerEvent("s6la:notify", "Information", "This is an information notification", 5000, 3, nil, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("notifytop", function()
+    TriggerEvent("s6la:notify", "Top", "Notification at top position", 5000, 3, 4, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("notifybottom", function()
+    TriggerEvent("s6la:notify", "Bottom", "Notification at bottom position", 5000, 3, 1, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("notifyleft", function()
+    TriggerEvent("s6la:notify", "Left", "Notification at left position", 5000, 3, 2, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("notifyright", function()
+    TriggerEvent("s6la:notify", "Right", "Notification at right position", 5000, 3, 3, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("notifymiddle", function()
+    TriggerEvent("s6la:notify", "Middle", "Notification at middle position", 5000, 3, 0, "test", "sound2.mp3")
+end, false)
+
+RegisterCommand("testall", function()
+    TriggerEvent("s6la:notify", "Error", "Error notification test", 5000, 0, 4, "test", "sound2.mp3")
+    Wait(200)
+    TriggerEvent("s6la:notify", "Success", "Success notification test", 5000, 1, 4, "test", "sound2.mp3")
+    Wait(200)
+    TriggerEvent("s6la:notify", "Warning", "Warning notification test", 5000, 2, 4, "test", "sound2.mp3")
+    Wait(200)
+    TriggerEvent("s6la:notify", "Information", "Information notification test", 5000, 3, 4, "test", "sound2.mp3")
+    Wait(200)
+    TriggerEvent("s6la:notify", "Top", "Top position test", 5000, 3, 4, "test", "sound2.mp3")
+    Wait(200)
+    TriggerEvent("s6la:notify", "Bottom", "Bottom position test", 5000, 3, 1, "test", "sound2.mp3")
+    Wait(200)
+    TriggerEvent("s6la:notify", "Left", "Left position test", 5000, 3, 2, "test", "sound2.mp3")
+    Wait(200)
+    TriggerEvent("s6la:notify", "Right", "Right position test", 5000, 3, 3, "test", "sound2.mp3")
+    Wait(200)
+    TriggerEvent("s6la:notify", "Middle", "Middle position test", 5000, 3, 0, "test", "sound2.mp3")
+end, false)

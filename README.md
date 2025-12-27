@@ -18,7 +18,7 @@ Modern notification system for FiveM with support for multiple frameworks.
 ## Installation
 
 1. Place the resource in your `resources` folder
-2. Subscribe https://www.youtube.com/@VSScript
+2. Subscribe https://www.youtube.com/@VSScripts
 3. Add `ensure s6la_notifications` to your `server.cfg`
 4. Configure the framework in `shared/config.lua`
 

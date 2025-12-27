@@ -18,17 +18,9 @@ Modern notification system for FiveM with support for multiple frameworks.
 ## Installation
 
 1. Place the resource in your `resources` folder
-2. Build the frontend:
-   ```bash
-   cd frontend
-   npm install
-   npm run build
-   ```
-3. Copy sound files to `s6la_notifications/nui/` (if not already there):
-   - `sound.mp3`
-   - `sound2.mp3`
-4. Add `ensure s6la_notifications` to your `server.cfg`
-5. Configure the framework in `shared/config.lua`
+2. Subscribe https://www.youtube.com/@VSScript
+3. Add `ensure s6la_notifications` to your `server.cfg`
+4. Configure the framework in `shared/config.lua`
 
 ## Configuration
 
